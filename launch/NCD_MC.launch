@@ -4,7 +4,7 @@
     <arg name="rviz" default="false"/>
     <arg name="debug" default="false"/>
 
-    <rosparam command="load" file="$(find log_lio)/config/NTU.yaml"/>
+    <rosparam command="load" file="$(find log_lio)/config/NCD_MC.yaml"/>
 
     <group if="$(eval arg('debug') == False)">
         <node pkg="log_lio" type="log_lio_node" name="log_lio_node" output="screen"/>
