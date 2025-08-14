@@ -75,12 +75,13 @@ find_package(PCL 1.7 REQUIRED)
 #find_package(GTSAM REQUIRED QUIET)
 
 ## set OpenCV DIR
-if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
-  Set(OpenCV_DIR "/home/hk/opencv-3.3.1/build") # important find opencv version
-else()
-  Set(OpenCV_DIR "/home/autolab/opencv-3.2.0/build") # important find opencv version, Neotic
-endif ()
-find_package(OpenCV 3.2 QUIET)
+# if ($ENV{ROS_DISTRO} STREQUAL "kinetic")
+#   Set(OpenCV_DIR "/home/hk/opencv-3.3.1/build") # important find opencv version
+# else()
+#   Set(OpenCV_DIR "/home/autolab/opencv-3.2.0/build") # important find opencv version, Neotic
+# endif ()
+# find_package(OpenCV 3.2 QUIET)
+find_package(OpenCV REQUIRED)
 
 
 message(Eigen: ${EIGEN3_INCLUDE_DIR})
@@ -125,3 +126,7 @@ target_include_directories(rs_to_velodyne PRIVATE ${PYTHON_INCLUDE_DIRS})
 add_executable(visualize_node src/visualizer_node.cpp)
 target_link_libraries(visualize_node  ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PYTHON_LIBRARIES})
 target_include_directories(visualize_node PRIVATE ${PYTHON_INCLUDE_DIRS})
+
+target_link_libraries(log_lio_node /workspace/lio_baselines_ws/src/lio_baselines/include/data_recorder/build/libdata_recorder.so)
+target_include_directories(log_lio_node PRIVATE /workspace/lio_baselines_ws/src/lio_baselines/include/data_recorder)
+
